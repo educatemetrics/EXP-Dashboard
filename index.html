@@ -962,37 +962,311 @@
             content: "👆";
         }
 
+        /* ===================================
+           MOBILE RESPONSIVE STYLES
+           =================================== */
+        
+        /* Tablets and smaller (iPad, etc) */
+        @media (max-width: 1024px) {
+            .score-cards {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .breakdown-table {
+                font-size: 13px;
+            }
+        }
+
+        /* Mobile devices */
         @media (max-width: 768px) {
+            /* Header adjustments */
             .header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .user-info {
+                font-size: 12px;
             }
 
+            /* Tabs become scrollable */
             .view-tabs {
                 overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+                gap: 0.5rem;
+            }
+            
+            .tab {
+                font-size: 13px;
+                padding: 0.6rem 1rem;
+                white-space: nowrap;
             }
 
+            /* Filters stack vertically */
             .filters {
                 flex-direction: column;
                 align-items: stretch;
+                gap: 0.75rem;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+            
+            .filter-group select {
+                width: 100%;
             }
 
+            /* Content padding */
             .content {
-                padding: 1rem;
+                padding: 0.75rem;
             }
 
+            /* Sections */
             .section {
                 padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .section-title {
+                font-size: 16px;
+            }
+            
+            .section-subtitle {
+                font-size: 12px;
             }
 
+            /* Score cards - single column on mobile */
+            .score-cards {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .score-card {
+                padding: 1rem;
+            }
+            
+            .score-card-value {
+                font-size: 32px;
+            }
+            
+            .score-card-label {
+                font-size: 12px;
+            }
+            
+            .score-card-subtext {
+                font-size: 11px;
+            }
+
+            /* Tables become scrollable */
+            .breakdown-table,
+            .sequencing-heatmap {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                white-space: nowrap;
+                font-size: 12px;
+            }
+            
+            .breakdown-table th,
+            .breakdown-table td {
+                padding: 0.5rem 0.75rem;
+                font-size: 12px;
+            }
+
+            /* Heatmap scroll container */
+            .heatmap-scroll {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Sequencing cells smaller */
+            .sequencing-cell {
+                min-width: 50px;
+                height: 50px;
+            }
+            
+            .sequencing-value {
+                font-size: 14px;
+            }
+            
+            .sequencing-label {
+                font-size: 9px;
+            }
+
+            /* Comparison bars stack */
+            .comparison-bars {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .comparison-bar-label {
+                font-size: 13px;
+            }
+
+            /* Modal full width on mobile */
+            .modal-content {
+                width: 95%;
+                max-width: 95%;
+                margin: 2.5% auto;
+                padding: 1rem;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            
+            .modal-header h2 {
+                font-size: 18px;
+            }
+
+            /* Drill metrics single column */
+            .drill-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            /* Insight cards */
+            .insight-card {
+                padding: 1rem;
+            }
+            
+            .insight-card h3 {
+                font-size: 14px;
+            }
+            
+            .insight-list li {
+                font-size: 13px;
+            }
+
+            /* Login box */
+            .login-box {
+                padding: 2rem 1.5rem;
+                width: 90%;
+                max-width: 400px;
+            }
+
+            /* Buttons */
+            .btn {
+                font-size: 14px;
+                padding: 0.75rem 1.25rem;
+            }
+            
+            /* Term comparison grid */
+            div[style*="grid-template-columns: repeat(auto-fit"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Funnel stages */
+            div[style*="grid-template-columns: repeat(auto-fit, minmax(200px"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* Small mobile devices (iPhone SE, etc) */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            .tab {
+                font-size: 12px;
+                padding: 0.5rem 0.75rem;
+            }
+            
+            .score-card-value {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 14px;
+            }
+            
+            .breakdown-table,
+            .sequencing-heatmap {
+                font-size: 11px;
+            }
+            
             .modal-content {
                 width: 98%;
                 margin: 1% auto;
+                padding: 0.75rem;
             }
+        }
 
-            .drill-metrics, .score-cards {
-                grid-template-columns: 1fr;
+        /* Landscape orientation on mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .content {
+                padding: 0.5rem;
+            }
+            
+            .section {
+                padding: 0.75rem;
+            }
+            
+            .modal-content {
+                max-height: 85vh;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            /* Larger touch targets */
+            .tab,
+            .btn,
+            select {
+                min-height: 44px; /* iOS recommended touch target */
+            }
+            
+            /* Prevent text selection on interactive elements */
+            .tab,
+            .btn,
+            .score-card {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            
+            /* Smooth scrolling */
+            * {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .header,
+            .filters,
+            .view-tabs,
+            .btn {
+                display: none !important;
+            }
+            
+            .content {
+                padding: 0;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .score-cards {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
