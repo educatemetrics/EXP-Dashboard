@@ -1495,15 +1495,50 @@ const DEMO_DATA = [
         let currentView = 'national';
 
         // DYNAMIC LEC DETECTION
+        // Term configuration - defines expected LECs and milestones per term
+        const TERM_CONFIG = {
+            term1: {
+                lecs: [1, 2, 3, 4, 5],
+                milestones: [1, 2],
+                label: 'Term 1'
+            },
+            term2: {
+                lecs: [6, 7, 8, 9, 10, 11, 12, 13, 14],
+                milestones: [3, 4],
+                label: 'Term 2'
+            },
+            term3: {
+                lecs: [15, 16, 17, 18, 19, 20],
+                milestones: [5, 6],
+                label: 'Term 3'
+            }
+        };
+
         function getLECsForTerm(year, term) {
-            // Dynamically detect which LECs exist in the data for this term
+            // First try to get from configuration
+            const config = TERM_CONFIG[term];
+            if (config && config.lecs) {
+                return config.lecs;
+            }
+            
+            // Fallback: Dynamically detect which LECs exist in the data for this term
             const termData = rawData.filter(d => d.year == year && d.term == term);
             if (termData.length === 0) return [];
             
-            const lecColumns = Object.keys(termData[0]).filter(key => key.match(/^lec\d+_scholars$/));
+            const lecColumns = Object.keys(termData[0]).filter(key => key.match(/^school_has_lec\d+$/));
             const lecNumbers = lecColumns.map(col => parseInt(col.match(/\d+/)[0])).sort((a, b) => a - b);
             
-            return lecNumbers;
+            return lecNumbers.length > 0 ? lecNumbers : [1, 2, 3, 4, 5]; // Default to term1
+        }
+        
+        function getMilestonesForTerm(term) {
+            const config = TERM_CONFIG[term];
+            return config && config.milestones ? config.milestones : [1, 2];
+        }
+        
+        function getTermLabel(term) {
+            const config = TERM_CONFIG[term];
+            return config && config.label ? config.label : term;
         }
 
         function getLECLabels(lecNumbers) {
